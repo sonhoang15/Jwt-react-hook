@@ -1,6 +1,7 @@
 import './App.scss';
+import Login from './components/Login/Login';
 import Nav from './components/Navigation/Nav';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -24,7 +25,7 @@ function App() {
             contact
           </Route>
           <Route path="/login">
-            login
+            <Login />
           </Route>
           <Route path="/" exact>
             home
