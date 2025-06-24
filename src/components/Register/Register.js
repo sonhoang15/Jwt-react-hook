@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./Register.scss"
 import { useHistory } from "react-router-dom";
 import img1 from "../../asset/Register or die.jpg"
@@ -11,38 +11,59 @@ const Register = (props) => {
     const [phone, setPhone] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [rePassword, setRePassword] = React.useState("");
+    const defaultInput = {
+        isValidEmail: true,
+        isValidUserName: true,
+        isValidPhone: true,
+        isValidPassword: true,
+        isValidRePassword: true
+    }
+    const [objectCheckInput, setObjectCheckInput] = React.useState({ ...defaultInput });
 
     const isValidInput = () => {
+        setObjectCheckInput({ ...defaultInput });
         if (!email || !userName || !phone || !password || !rePassword) {
+            setObjectCheckInput({
+                isValidEmail: !!email,
+                isValidUserName: !!userName,
+                isValidPhone: !!phone,
+                isValidPassword: !!password,
+                isValidRePassword: !!rePassword
+            });
             toast.error("Please fill all fields");
+            return false;
+        }
+        let regx = /\S+@\S+\.\S+/;
+        if (!regx.test(email)) {
+            setObjectCheckInput({
+                ...defaultInput,
+                isValidEmail: false
+            });
+            toast.error("Invalid email format");
             return false;
         }
         if (password !== rePassword) {
             toast.error("Passwords do not match");
             return false;
         }
-        let regx = /\S+@\S+\.\S+/;
-        if (!regx.test(email)) {
-            toast.error("Invalid email format");
-            return false;
-        }
+
         return true;
     }
 
 
+
+    useEffect(() => {
+
+    }, []);
     const handleRegister = async () => {
         let check = isValidInput();
-        toast.success("Wow so easy!");
-        let userdata = {
-            email: email,
-            userName: userName,
-            phone: phone,
-            password: password,
-            rePassword: rePassword
+        if (!check === true) {
+            axios.post("http://localhost:8080/api/v1/register", {
+                email, userName, phone, password,
+            })
         }
-        console.log(userdata);
-    }
 
+    }
     let history = useHistory();
     const login = () => {
         history.push("/login")
@@ -56,7 +77,7 @@ const Register = (props) => {
                             Wellcome to Here
                         </div>
                         <div className='meme'>
-                            <img src={img1} class="img-fluid" alt="Hình ảnh đáp ứng" />
+                            <img src={img1} className="img-fluid" alt="Hình ảnh đáp ứng" />
                         </div>
                         <div className='detail'>
                             create account or die ...
@@ -68,31 +89,31 @@ const Register = (props) => {
                         </div>
                         <div className='form-group'>
                             <label>Email</label>
-                            <input type='text' className='form-control' placeholder='Email address'
+                            <input type='text' className={objectCheckInput.isValidEmail ? 'form-control' : 'form-control is-invalid'} placeholder='Email address'
                                 value={email} onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
                             <label>User name</label>
-                            <input type='text' className='form-control' placeholder='User name'
+                            <input type='text' className={objectCheckInput.isValidUserName ? 'form-control' : 'form-control is-invalid'} placeholder='User name'
                                 value={userName} onChange={(e) => setUserName(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
                             <label>Phone</label>
-                            <input type='text' className='form-control' placeholder='Phone number'
+                            <input type='text' className={objectCheckInput.isValidPhone ? 'form-control' : 'form-control is-invalid'} placeholder='Phone number'
                                 value={phone} onChange={(e) => setPhone(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
                             <label>Password</label>
-                            <input type='password' className='form-control' placeholder='Your password'
+                            <input type='password' className={objectCheckInput.isValidPassword ? 'form-control' : 'form-control is-invalid'} placeholder='Your password'
                                 value={password} onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
                             <label>Re-enter Password</label>
-                            <input type='password' className='form-control' placeholder='Re-enter Password'
+                            <input type='password' className={objectCheckInput.isValidRePassword ? 'form-control' : 'form-control is-invalid'} placeholder='Re-enter Password'
                                 value={rePassword} onChange={(e) => setRePassword(e.target.value)}
                             />
                         </div>

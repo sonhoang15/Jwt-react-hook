@@ -19,7 +19,7 @@ const Login = (props) => {
                             My name is Son , nice to meet you '-'
                         </div>
                         <div className='meme'>
-                            <img src={img1} class="img-fluid" alt="Hình ảnh đáp ứng" />
+                            <img src={img1} className="img-fluid" alt="Hình ảnh đáp ứng" />
                         </div>
                     </div>
                     <div className='content-right col-sm-5 col-12 d-flex flex-column gap-3 py-3'>
