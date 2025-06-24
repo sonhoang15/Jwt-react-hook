@@ -1,0 +1,92 @@
+import React from 'react';
+import "./Register.scss"
+import { useHistory } from "react-router-dom";
+import img1 from "../../asset/Register or die.jpg"
+import axios from 'axios';
+import { useState } from 'react';
+const Register = (props) => {
+    const [email, setEmail] = React.useState("");
+    const [userName, setUserName] = React.useState("");
+    const [phone, setPhone] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [rePassword, setRePassword] = React.useState("");
+
+    const handleRegister = async () => {
+        let userdata = {
+            email: email,
+            userName: userName,
+            phone: phone,
+            password: password,
+            rePassword: rePassword
+        }
+        console.log(userdata);
+    }
+
+    let history = useHistory();
+    const login = () => {
+        history.push("/login")
+    }
+    return (
+        <div className='register-container'>
+            <div className='container'>
+                <div className='row px-3 px-sm-0'>
+                    <div className='content-left col-12 d-none col-sm-7 d-sm-block'>
+                        <div className='brand-top'>
+                            Wellcome to Here
+                        </div>
+                        <div className='meme'>
+                            <img src={img1} class="img-fluid" alt="Hình ảnh đáp ứng" />
+                        </div>
+                        <div className='detail'>
+                            create account or die ...
+                        </div>
+                    </div>
+                    <div className='content-right col-sm-5 col-12 d-flex flex-column gap-3 py-3'>
+                        <div className='brand d-sm-none'>
+                            Well come
+                        </div>
+                        <div className='form-group'>
+                            <label>Email</label>
+                            <input type='text' className='form-control' placeholder='Email address'
+                                value={email} onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label>User name</label>
+                            <input type='text' className='form-control' placeholder='User name'
+                                value={userName} onChange={(e) => setUserName(e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label>Phone</label>
+                            <input type='text' className='form-control' placeholder='Phone number'
+                                value={phone} onChange={(e) => setPhone(e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label>Password</label>
+                            <input type='password' className='form-control' placeholder='Your password'
+                                value={password} onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label>Re-enter Password</label>
+                            <input type='password' className='form-control' placeholder='Re-enter Password'
+                                value={rePassword} onChange={(e) => setRePassword(e.target.value)}
+                            />
+                        </div>
+
+                        <button className='btn btn-warning' onClick={() => handleRegister()}>Register</button>
+                        <hr />
+                        <div className='text-center'>
+                            <button className='btn btn-primary' onClick={() => login()}>Already've an account ?</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Register;

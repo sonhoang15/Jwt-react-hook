@@ -1,11 +1,10 @@
-.login-container {
+.register-container {
     background-color: #1e1f26;
     min-height: 100vh;
     padding-top: 20px;
 
     .content-right {
-        margin-top: 150px;
-        margin-bottom: 200px;
+
 
         .brand {
             text-transform: uppercase;
@@ -15,10 +14,12 @@
             font-weight: 700;
         }
 
+
+
         border-radius: 10px;
         background-color: whitesmoke;
-        box-shadow: 0 2px 4px rgb(108 233 9 / 57%),
-        0 8px 16px rgb(94 207 131 / 99%);
+        box-shadow: 0 2px 4px rgba(233, 9, 9, 0.57),
+        0 8px 16px rgba(185, 85, 85, 0.99);
         box-sizing: border-box;
 
         .forgot-password {
@@ -31,22 +32,27 @@
     }
 
     .content-left {
-
-
         .meme {
             img {
                 width: 600px;
-                height: 500px;
             }
         }
 
-        .brand {
+        .brand-top {
             text-transform: uppercase;
             font-size: 30px;
             color: whitesmoke;
         }
 
+        .brand {
+            text-transform: uppercase;
+            font-size: 20px;
+            color: whitesmoke;
+        }
+
+
         .detail {
+            font-size: 25px;
             color: whitesmoke;
         }
     }
