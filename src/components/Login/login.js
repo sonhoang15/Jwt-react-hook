@@ -37,7 +37,31 @@ const Login = (props) => {
             toast.error("Please enter your password");
             return;
         }
-        await LoginService(valueLogin, password)
+        let response = await LoginService(valueLogin, password)
+        if (response && response.data && +response.data.EC === 0) {
+
+            let data = {
+                isAuthenticated: true,
+                token: 'token fake'
+            }
+            sessionStorage.setItem('account', JSON.stringify(data));
+            history.push("/users");
+            toast.success("Login success");
+        } else {
+            if (response && response.errCode === 1) {
+                setObjValidInput({
+                    ...objvalidInput,
+                    isValidValueLogin: false
+                })
+            }
+            if (response && response.errCode === 2) {
+                setObjValidInput({
+                    ...objvalidInput,
+                    isValidPassword: false
+                })
+            }
+            toast.error(response.message);
+        }
     }
     return (
         <div className='login-container'>
