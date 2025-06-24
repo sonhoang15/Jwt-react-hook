@@ -5,12 +5,13 @@ import img1 from "../../asset/Register or die.jpg"
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { RegisterService } from '../../Services/userService';
 const Register = (props) => {
     const [email, setEmail] = React.useState("");
-    const [userName, setUserName] = React.useState("");
+    const [username, setUserName] = React.useState("");
     const [phone, setPhone] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [rePassword, setRePassword] = React.useState("");
+    const [repassword, setRePassword] = React.useState("");
     const defaultInput = {
         isValidEmail: true,
         isValidUserName: true,
@@ -22,13 +23,13 @@ const Register = (props) => {
 
     const isValidInput = () => {
         setObjectCheckInput({ ...defaultInput });
-        if (!email || !userName || !phone || !password || !rePassword) {
+        if (!email || !username || !phone || !password || !repassword) {
             setObjectCheckInput({
-                isValidEmail: !!email,
-                isValidUserName: !!userName,
-                isValidPhone: !!phone,
-                isValidPassword: !!password,
-                isValidRePassword: !!rePassword
+                isValidEmail: false,
+                isValidUserName: false,
+                isValidPhone: false,
+                isValidPassword: false,
+                isValidRePassword: false
             });
             toast.error("Please fill all fields");
             return false;
@@ -42,7 +43,7 @@ const Register = (props) => {
             toast.error("Invalid email format");
             return false;
         }
-        if (password !== rePassword) {
+        if (password !== repassword) {
             toast.error("Passwords do not match");
             return false;
         }
@@ -57,10 +58,15 @@ const Register = (props) => {
     }, []);
     const handleRegister = async () => {
         let check = isValidInput();
-        if (!check === true) {
-            axios.post("http://localhost:8080/api/v1/register", {
-                email, userName, phone, password,
-            })
+        if (check === true) {
+            let response = await RegisterService(email, username, phone, password);
+            let severData = response.data;
+            if (+severData.EC === 0) {
+                toast.success(severData.EM);
+                history.push("/login");
+            } else {
+                toast.error(severData.EM);
+            }
         }
 
     }
@@ -96,7 +102,7 @@ const Register = (props) => {
                         <div className='form-group'>
                             <label>User name</label>
                             <input type='text' className={objectCheckInput.isValidUserName ? 'form-control' : 'form-control is-invalid'} placeholder='User name'
-                                value={userName} onChange={(e) => setUserName(e.target.value)}
+                                value={username} onChange={(e) => setUserName(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
@@ -114,7 +120,7 @@ const Register = (props) => {
                         <div className='form-group'>
                             <label>Re-enter Password</label>
                             <input type='password' className={objectCheckInput.isValidRePassword ? 'form-control' : 'form-control is-invalid'} placeholder='Re-enter Password'
-                                value={rePassword} onChange={(e) => setRePassword(e.target.value)}
+                                value={repassword} onChange={(e) => setRePassword(e.target.value)}
                             />
                         </div>
 
