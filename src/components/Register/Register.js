@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import img1 from "../../asset/Register or die.jpg"
 import axios from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 const Register = (props) => {
     const [email, setEmail] = React.useState("");
     const [userName, setUserName] = React.useState("");
@@ -11,7 +12,27 @@ const Register = (props) => {
     const [password, setPassword] = React.useState("");
     const [rePassword, setRePassword] = React.useState("");
 
+    const isValidInput = () => {
+        if (!email || !userName || !phone || !password || !rePassword) {
+            toast.error("Please fill all fields");
+            return false;
+        }
+        if (password !== rePassword) {
+            toast.error("Passwords do not match");
+            return false;
+        }
+        let regx = /\S+@\S+\.\S+/;
+        if (!regx.test(email)) {
+            toast.error("Invalid email format");
+            return false;
+        }
+        return true;
+    }
+
+
     const handleRegister = async () => {
+        let check = isValidInput();
+        toast.success("Wow so easy!");
         let userdata = {
             email: email,
             userName: userName,
