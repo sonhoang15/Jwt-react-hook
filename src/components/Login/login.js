@@ -2,7 +2,7 @@
 import "./Login.scss"
 import { useHistory } from "react-router-dom";
 import img1 from "../../asset/hi login hẹ hẹ.jpg"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { LoginService } from "../../Services/userService";
 const Login = (props) => {
@@ -45,24 +45,30 @@ const Login = (props) => {
                 token: 'token fake'
             }
             sessionStorage.setItem('account', JSON.stringify(data));
-            history.push("/users");
+            history.push("/");
+            window.location.reload();
             toast.success("Login success");
-        } else {
-            if (response && response.errCode === 1) {
-                setObjValidInput({
-                    ...objvalidInput,
-                    isValidValueLogin: false
-                })
-            }
-            if (response && response.errCode === 2) {
-                setObjValidInput({
-                    ...objvalidInput,
-                    isValidPassword: false
-                })
-            }
-            toast.error(response.message);
+        }
+        if (response && +response.data.EC !== 0) {
+            setObjValidInput({
+                ...objvalidInput,
+                isValidValueLogin: false
+            })
+            toast.error(response.EM)
         }
     }
+    const handlePressEnter = (e) => {
+        if (e.charCode === 13 || e.code === 'Enter') {
+            login();
+        }
+    }
+    useEffect(() => {
+        let session = sessionStorage.getItem('account');
+        if (session) {
+            history.push("/");
+            window.location.reload();
+        }
+    }, [])
     return (
         <div className='login-container'>
             <div className='container'>
@@ -95,6 +101,7 @@ const Login = (props) => {
                             placeholder='Your password'
                             value={password}
                             onChange={(e) => { setPassword(e.target.value) }}
+                            onKeyPress={(e) => handlePressEnter(e)}
                         />
                         <button className='btn btn-warning' onClick={() => login()}>Login</button>
                         <span className='text-center'><a className='forgot-password' href='#'>Forgot your password?</a></span>

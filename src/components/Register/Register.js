@@ -54,8 +54,12 @@ const Register = (props) => {
 
 
     useEffect(() => {
-
-    }, []);
+        let session = sessionStorage.getItem('account');
+        if (session) {
+            history.push("/");
+            window.location.reload();
+        }
+    }, [])
     const handleRegister = async () => {
         let check = isValidInput();
         if (check === true) {
