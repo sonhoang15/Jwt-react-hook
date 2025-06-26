@@ -13,6 +13,7 @@ function User(props) {
     const [pageCount, setPageCount] = useState(0);
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [userToDelete, setUserToDelete] = useState({});
+    const [isShowModalUser, setShowModalUser] = useState(false)
 
     useEffect(() => {
         fetchUsers()
@@ -51,6 +52,9 @@ function User(props) {
             toast.error(response.data.EM);
         }
     }
+    const onHideModalUser = () => {
+        setShowModalUser(false)
+    }
     return (
         <>
             <div className=' container'>
@@ -61,7 +65,7 @@ function User(props) {
                         </div>
                         <div className='user-actions'>
                             <button className='btn btn-secondary'>Edit</button>
-                            <button className='btn btn-primary'>Add User</button>
+                            <button className='btn btn-primary' onClick={() => setShowModalUser(true)}>Add User</button>
                         </div>
                     </div>
                     <div className='user-table'>
@@ -87,7 +91,7 @@ function User(props) {
                                                         <td>{item.id}</td>
                                                         <td>{item.email}</td>
                                                         <td>{item.username}</td>
-                                                        <td>{item.group ? item.group.name : 'N/A'}</td>
+                                                        <td>{item.Group ? item.Group.name : 'N/A'}</td>
                                                         <td>
                                                             <button className='btn btn-warning mx-3'>Edit</button>
                                                             <button className='btn btn-danger'
@@ -140,7 +144,11 @@ function User(props) {
                 ConfirmDelete={ConfirmDelete}
                 userToDelete={userToDelete}
             />
-            <ModalUser />
+            <ModalUser
+                Title={'Create new user'}
+                hide={onHideModalUser}
+                show={isShowModalUser}
+            />
         </>
     );
 }
