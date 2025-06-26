@@ -3,6 +3,7 @@ import { fetchAllUsers, deleteUser } from '../../Services/userService';
 import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 import ModalDelete from './ModalDelete';
+import ModalUser from './ModalUser';
 
 
 function User(props) {
@@ -65,7 +66,7 @@ function User(props) {
                     </div>
                     <div className='user-table'>
                         <div className='table'>
-                            <table class="table table-hover table-bordered">
+                            <table className="table table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
@@ -100,7 +101,7 @@ function User(props) {
                                         </>
                                         :
                                         <>
-                                            <span>not found user</span>
+                                            <tr><td><span>not found user</span></td></tr>
                                         </>
                                     }
                                 </tbody>
@@ -139,6 +140,7 @@ function User(props) {
                 ConfirmDelete={ConfirmDelete}
                 userToDelete={userToDelete}
             />
+            <ModalUser />
         </>
     );
 }
