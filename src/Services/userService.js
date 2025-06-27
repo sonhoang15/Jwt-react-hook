@@ -23,6 +23,9 @@ const fetchGroups = () => {
 const createNewUser = (userData) => {
     return axios.post(`http://localhost:8080/api/v1/user/create`, { ...userData })
 }
+const updateUser = (userData) => {
+    return axios.put(`http://localhost:8080/api/v1/user/update`, { ...userData })
+}
 export {
-    RegisterService, LoginService, fetchAllUsers, deleteUser, fetchGroups, createNewUser
+    RegisterService, LoginService, fetchAllUsers, deleteUser, fetchGroups, createNewUser, updateUser
 }
