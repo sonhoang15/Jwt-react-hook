@@ -38,7 +38,7 @@ const Login = (props) => {
             return;
         }
         let response = await LoginService(valueLogin, password)
-        if (response && response.data && +response.data.EC === 0) {
+        if (response && +response.EC === 0) {
             let data = {
                 isAuthenticated: true,
                 token: 'token fake'
@@ -48,7 +48,7 @@ const Login = (props) => {
             window.location.reload();
             toast.success("Login success");
         }
-        if (response && +response.data.EC !== 0) {
+        if (response && +response.EC !== 0) {
             setObjValidInput({
                 ...objvalidInput,
                 isValidValueLogin: false

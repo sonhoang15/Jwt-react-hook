@@ -23,10 +23,9 @@ function User(props) {
 
     const fetchUsers = async () => {
         let response = await fetchAllUsers(itemOffset, itemLimit);
-        if (response && response.data && response.data.EC === 0) {
-            console.log(response.data.DT);
-            setPageCount(+response.data.DT.totalPage);
-            setListUser(response.data.DT.users);
+        if (response && response.EC === 0) {
+            setPageCount(+response.DT.totalPage);
+            setListUser(response.DT.users);
         } else {
             console.error("Failed to fetch users");
         }
@@ -46,12 +45,12 @@ function User(props) {
 
     const ConfirmDelete = async () => {
         let response = await deleteUser(userToDelete);
-        if (response && response.data && +response.data.EC === 0) {
-            toast.success(response.data.EM);
+        if (response && +response.EC === 0) {
+            toast.success(response.EM);
             await fetchUsers();
             setShowModalDelete(false);
         } else {
-            toast.error(response.data.EM);
+            toast.error(response.EM);
         }
     }
     const onHideModalUser = async () => {
@@ -123,7 +122,7 @@ function User(props) {
                                                             </span>
                                                             <span className='delete'
                                                                 onClick={() => handleDeleteUser(item)}
-                                                            ><i class="fa fa-trash" aria-hidden="true"></i>
+                                                            ><i className="fa fa-trash" aria-hidden="true"></i>
                                                             </span>
                                                         </td>
                                                     </tr>
