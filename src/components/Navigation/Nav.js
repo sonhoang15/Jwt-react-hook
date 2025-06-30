@@ -5,7 +5,7 @@ import { useState } from "react";
 import { UserContext } from "../../context/UserContext"
 
 
-const Nav = (props) => {
+const NavHeader = (props) => {
     const { user } = useContext(UserContext);
     const location = useLocation();
 
@@ -29,4 +29,4 @@ const Nav = (props) => {
 
 }
 
-export default Nav 
+export default NavHeader 

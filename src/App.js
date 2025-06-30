@@ -1,5 +1,4 @@
 import './App.scss';
-
 import Nav from './components/Navigation/Nav';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,7 +8,6 @@ import { BrowserRouter as Router, } from "react-router-dom";
 import Approutes from './Routes/AppRoutes';
 import { ClimbingBoxLoader } from "react-spinners";
 import { UserContext } from "./context/UserContext"
-// import cookieParser from 'cookie-parser';
 
 
 function App() {
@@ -21,8 +19,7 @@ function App() {
     <>
 
       <Router>
-
-        {/* {user && user.isLoading ?
+        {user && user.isLoading ?
           <div className='loading-container'>
             <ClimbingBoxLoader
               color="green"
@@ -34,15 +31,14 @@ function App() {
           </div>
           :
           <>
-
+            <div className='app-header'>
+              <Nav />
+            </div>
+            <div className='app-container'>
+              <Approutes />
+            </div>
           </>
-        } */}
-        <div className='app-header'>
-          <Nav />
-        </div>
-        <div className='app-container'>
-          <Approutes />
-        </div>
+        }
 
       </Router>
       <ToastContainer
@@ -62,5 +58,4 @@ function App() {
   );
 }
 
-// app.use(cookieParser());
 export default App;

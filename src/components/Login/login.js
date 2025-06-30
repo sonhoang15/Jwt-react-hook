@@ -6,6 +6,7 @@ import { useEffect, useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { LoginService } from "../../Services/userService";
 import { UserContext } from "../../context/UserContext"
+import { join } from "lodash";
 
 
 
@@ -54,6 +55,7 @@ const Login = (props) => {
                 token,
                 account: { groupWithRoles, email, username }
             }
+            localStorage.setItem("jwt", token)
             loginContext(data)
             history.push("/user");
             toast.success("Login success");
