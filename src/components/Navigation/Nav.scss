@@ -21,3 +21,41 @@
         color: white;
     }
 }
+
+.Nav-header {
+    .bg-header {
+        background-color: aqua;
+    }
+
+
+
+
+    .navbar-light {
+        .navbar-brand {
+
+            &:hover {
+                color: rgb(255, 255, 255) !important;
+            }
+        }
+
+        .nav-link {
+
+            &.active {
+                color: rgb(255, 0, 217) !important;
+            }
+        }
+
+        .navbar-nav {
+            .nav-link {
+                color: rgb(0, 47, 255);
+
+                &:hover {
+                    color: #04AA6D !important;
+                }
+
+            }
+        }
+
+
+    }
+}

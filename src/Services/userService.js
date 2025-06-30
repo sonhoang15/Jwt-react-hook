@@ -30,6 +30,17 @@ const updateUser = (userData) => {
 const getUserAccount = () => {
     return axios.get(`/api/v1/account`)
 }
+const logOutUser = () => {
+    return axios.post(`/api/v1/logout`)
+}
 export {
-    RegisterService, LoginService, fetchAllUsers, deleteUser, fetchGroups, createNewUser, updateUser, getUserAccount
+    RegisterService,
+    LoginService,
+    fetchAllUsers,
+    deleteUser,
+    fetchGroups,
+    createNewUser,
+    updateUser,
+    getUserAccount,
+    logOutUser
 }

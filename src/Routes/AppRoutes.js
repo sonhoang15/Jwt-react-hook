@@ -7,12 +7,14 @@ import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 import User from '../components/ManageUsers/User';
 import PrivateRoutes from './PrivateRoutes';
+import Roles from '../components/Roles/Roles';
 
 function Approutes(props) {
     return (
         <>
             <Switch>
                 <PrivateRoutes path="/users" component={User} />
+                <PrivateRoutes path="/roles" component={Roles} />
                 {/* <PrivateRoutes path="/project" /> */}
                 <Route path="/login">
                     <Login />
