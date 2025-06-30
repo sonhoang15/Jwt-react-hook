@@ -1,0 +1,22 @@
+.css-fpqs8j {
+    position: static !important;
+    z-index: 999;
+}
+
+.css-1uzbm8n {
+    top: 20% !important
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    z-index: 99999;
+
+    .loading {
+        font-size: 20px;
+        font-weight: 700;
+    }
+}

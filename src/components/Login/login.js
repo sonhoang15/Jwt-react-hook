@@ -2,10 +2,16 @@
 import "./Login.scss"
 import { useHistory } from "react-router-dom";
 import img1 from "../../asset/hi login hẹ hẹ.jpg"
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { LoginService } from "../../Services/userService";
+import { UserContext } from "../../context/UserContext"
+
+
+
 const Login = (props) => {
+
+    const { loginContext } = useContext(UserContext);
     let history = useHistory();
 
     const [valueLogin, setValueLogin] = useState("");
@@ -39,13 +45,17 @@ const Login = (props) => {
         }
         let response = await LoginService(valueLogin, password)
         if (response && +response.EC === 0) {
+            let groupWithRoles = response.DT.groupWithRoles;
+            let email = response.DT.email;
+            let username = response.DT.username;
+            let token = response.DT.access_token
             let data = {
                 isAuthenticated: true,
-                token: 'token fake'
+                token,
+                account: { groupWithRoles, email, username }
             }
-            sessionStorage.setItem('account', JSON.stringify(data));
-            history.push("/");
-            window.location.reload();
+            loginContext(data)
+            history.push("/user");
             toast.success("Login success");
         }
         if (response && +response.EC !== 0) {
@@ -61,13 +71,6 @@ const Login = (props) => {
             login();
         }
     }
-    useEffect(() => {
-        let session = sessionStorage.getItem('account');
-        if (session) {
-            history.push("/");
-            window.location.reload();
-        }
-    }, [])
     return (
         <div className='login-container'>
             <div className='container'>

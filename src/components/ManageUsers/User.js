@@ -4,7 +4,8 @@ import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 import ModalDelete from './ModalDelete';
 import ModalUser from './ModalUser';
-import "./User.scss"
+import "./User.scss";
+
 
 
 function User(props) {
@@ -18,7 +19,8 @@ function User(props) {
     const [actionModalUser, setActionModalUser] = useState("CREATE")
     const [dataModalUser, setDataModalUser] = useState("")
     useEffect(() => {
-        fetchUsers()
+        fetchUsers();
+
     }, [itemOffset]);
 
     const fetchUsers = async () => {

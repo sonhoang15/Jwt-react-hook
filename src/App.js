@@ -3,49 +3,64 @@ import './App.scss';
 import Nav from './components/Navigation/Nav';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import _ from 'lodash';
-
-import {
-  BrowserRouter as Router,
-} from "react-router-dom";
-
-import { useEffect } from 'react';
+import { BrowserRouter as Router, } from "react-router-dom";
 import Approutes from './Routes/AppRoutes';
+import { ClimbingBoxLoader } from "react-spinners";
+import { UserContext } from "./context/UserContext"
+// import cookieParser from 'cookie-parser';
+
 
 function App() {
-  const [account, setAccount] = useState({});
 
-  useEffect(() => {
-    let session = sessionStorage.getItem('account');
-    if (session) {
-      setAccount(JSON.parse(session));
-    }
-  }, []);
+  const { user } = useContext(UserContext);
+  console.log("user:", user);
+
   return (
     <>
+
       <Router>
+
+        {/* {user && user.isLoading ?
+          <div className='loading-container'>
+            <ClimbingBoxLoader
+              color="green"
+              loading
+              size={20}
+              speedMultiplier={1}
+            />
+            <div className='loading'>loading ...</div>
+          </div>
+          :
+          <>
+
+          </>
+        } */}
         <div className='app-header'>
           <Nav />
         </div>
-        <div className=' app-container'>
+        <div className='app-container'>
           <Approutes />
         </div>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+
       </Router>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
     </>
   );
 }
 
+// app.use(cookieParser());
 export default App;

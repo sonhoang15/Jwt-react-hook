@@ -20,7 +20,6 @@ function Approutes(props) {
                 <Route path="/register">
                     <Register />
                 </Route>
-
                 <Route path="/" exact>
                     home
                 </Route>

@@ -1,25 +1,22 @@
 import React from 'react';
-import {
-    Route,
-} from "react-router-dom";
-import { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { useEffect, useContext } from 'react';
+import { Redirect } from "react-router-dom";
+import { UserContext } from "../context/UserContext"
 
 function PrivateRoutes(props) {
-    let history = useHistory();
-    useEffect(() => {
-        let session = sessionStorage.getItem('account');
-        if (!session) {
-            history.push("/login");
-            window.location.reload();
-        }
-    }, []);
-    return (
-        <div>
-            <Route path={props.path} component={props.component}
-            />
-        </div>
-    );
+    const { user } = useContext(UserContext);
+    if (user && user.isAuthenticated === true) {
+        return (
+            <div>
+                <Route path={props.path} component={props.component}
+                />
+            </div>
+        );
+    } else {
+        return <Redirect to='/login'></Redirect>
+    }
+
 }
 
 export default PrivateRoutes;
