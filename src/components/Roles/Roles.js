@@ -4,6 +4,7 @@ import './Roles.scss'
 import _, { result, set, values } from 'lodash';
 import { v4 as uuidv4 } from 'uuid'
 import { toast } from 'react-toastify';
+import { createRoles } from '../../Services/roleService'
 
 function Roles(props) {
     const dataChildDefault = { url: "", description: "", isValidUrl: true }
@@ -49,12 +50,16 @@ function Roles(props) {
         return result
     }
 
-    const handleSave = () => {
+    const handleSave = async () => {
         let invalidObj = Object.entries(listChilds).find(([key, child], index) => {
             return child && !child.url
         })
         if (!invalidObj) {
             let data = buidDataToPersist()
+            let res = await createRoles(data)
+            if (res && res.EC === 0) {
+                toast.success(res.EM)
+            }
         } else {
             toast.error("Input URL empty")
             let _listChilds = _.cloneDeep(listChilds)

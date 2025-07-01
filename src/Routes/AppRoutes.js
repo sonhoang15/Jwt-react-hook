@@ -13,8 +13,8 @@ function Approutes(props) {
     return (
         <>
             <Switch>
-                <PrivateRoutes path="/users" component={User} />
-                <PrivateRoutes path="/roles" component={Roles} />
+                <PrivateRoutes exact path="/users" component={User} />
+                <PrivateRoutes exact path="/roles" component={Roles} />
                 {/* <PrivateRoutes path="/project" /> */}
                 <Route path="/login">
                     <Login />

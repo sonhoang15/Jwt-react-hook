@@ -8,7 +8,15 @@ const instance = axios.create({
 
 instance.defaults.withCredentials = true
 // // Alter defaults after instance has been created
-instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("jwt")}`;
+instance.interceptors.request.use(function (config) {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
@@ -37,7 +45,7 @@ instance.interceptors.response.use(function (response) {
         // forbidden (permission related issues)
         case 403: {
             toast.error(`You don't permission to access this resource ...`)
-            return Promise.reject(error);
+            return error.response.data;
         }
 
         // bad request

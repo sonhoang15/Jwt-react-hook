@@ -30,7 +30,6 @@ const UserProvider = ({ children }) => {
 
     const fetchUser = async () => {
         let response = await getUserAccount();
-        console.log("check res fetch", response)
         if (response && response.EC === 0) {
             let groupWithRoles = response.DT.groupWithRoles;
             let email = response.DT.email;
