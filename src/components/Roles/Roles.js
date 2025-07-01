@@ -1,13 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './Roles.scss'
 import _, { result, set, values } from 'lodash';
 import { v4 as uuidv4 } from 'uuid'
 import { toast } from 'react-toastify';
 import { createRoles } from '../../Services/roleService'
+import TableRoles from './TableRoles'
 
 function Roles(props) {
     const dataChildDefault = { url: "", description: "", isValidUrl: true }
+
+    const childRef = useRef();
 
     const [listChilds, setListChilds] = useState({
         child: dataChildDefault
@@ -59,6 +62,7 @@ function Roles(props) {
             let res = await createRoles(data)
             if (res && res.EC === 0) {
                 toast.success(res.EM)
+                childRef.current.fecthListRole()
             }
         } else {
             toast.error("Input URL empty")
@@ -109,6 +113,11 @@ function Roles(props) {
                         </div>
 
                     </div>
+                </div>
+                <hr />
+                <div className=' mt-3'>
+                    <h4>list role</h4>
+                    <TableRoles ref={childRef} />
                 </div>
 
             </div>
