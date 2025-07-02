@@ -8,18 +8,13 @@ import _ from 'lodash';
 
 const GroupRole = (props) => {
     const [userGroups, setuserGroups] = useState([]);
-    const [group, setGroups] = useState("");
     const [listRoles, setListRoles] = useState([]);
+    const [selectGroup, setSelectGroups] = useState("");
     const [assignRoleByGroup, setAssignRoleByGroup] = useState([])
-
     useEffect(() => {
         getGroups();
         getAllRoles()
     }, []);
-    // handleOnchangeSelect = () => {
-
-    // }
-
     const getGroups = async () => {
         let res = await fetchGroups();
         if (res && +res.EC === 0) {
@@ -32,20 +27,21 @@ const GroupRole = (props) => {
         let data = await fetchAllRole()
         if (data && +data.EC === 0) {
             setListRoles(data.DT)
+        } else {
+            console.error("Failed to fetch roles");
         }
     }
-
     const handleOnchangeGroup = async (value) => {
-        setGroups(value)
+        setSelectGroups(value)
         if (value) {
             let data = await fetchRoleByGroup(value)
             if (data && +data.EC === 0) {
-                let result = buildDataByGroup(data.DT.Roles, listRoles)
+                let result = buildDataRoleByGroup(data.DT.Roles, listRoles)
                 setAssignRoleByGroup(result)
             }
         }
     }
-    const buildDataByGroup = (groupRoles, allRoles) => {
+    const buildDataRoleByGroup = (groupRoles, allRoles) => {
         let result = [];
         if (allRoles && allRoles.length > 0) {
             allRoles.map(role => {
@@ -76,10 +72,10 @@ const GroupRole = (props) => {
     const buildDataToSave = () => {
         let result = {};
         const _assignRoleByGroup = _.cloneDeep(assignRoleByGroup);
-        result.groupId = group
+        result.groupId = selectGroup
         let groupRolesFilter = _assignRoleByGroup.filter(item => item.isAssigned === true)
         let finalGroupRoles = groupRolesFilter.map(item => {
-            let data = { groupId: +group, roleId: +item.id }
+            let data = { groupId: +selectGroup, roleId: +item.id }
             return data
         })
         result.groupRoles = finalGroupRoles;
@@ -119,7 +115,7 @@ const GroupRole = (props) => {
                             </select>
                         </div>
                         <hr />
-                        {group &&
+                        {selectGroup &&
                             <div className='roles'>
                                 <h5>Assign Roles:</h5>
                                 {

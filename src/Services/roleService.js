@@ -3,7 +3,7 @@ import axios from "../setup/axios"
 const createRoles = (roles) => {
     return axios.post('/api/v1/role/create', [...roles])
 }
-const fetchAllRole = () => {
+const fetchAllRole = (page, limit) => {
     return axios.get(`/api/v1/role/read`)
 }
 const deleteRole = (role) => {

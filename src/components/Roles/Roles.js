@@ -63,7 +63,9 @@ function Roles(props) {
             if (res && res.EC === 0) {
                 toast.success(res.EM)
                 childRef.current.fecthListRole()
-                setListChilds([dataChildDefault])
+                setListChilds({
+                    child: dataChildDefault
+                });
             }
         } else {
             toast.error("Input URL empty")

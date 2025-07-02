@@ -8,7 +8,7 @@ import "./User.scss";
 
 
 
-function User(props) {
+const User = (props) => {
     const [listUser, setListUser] = useState([]);
     const [itemOffset, setItemOffset] = useState(1);
     const [itemLimit, setItemLimit] = useState(3);
@@ -18,9 +18,9 @@ function User(props) {
     const [isShowModalUser, setShowModalUser] = useState(false)
     const [actionModalUser, setActionModalUser] = useState("CREATE")
     const [dataModalUser, setDataModalUser] = useState("")
+
     useEffect(() => {
         fetchUsers();
-
     }, [itemOffset]);
 
     const fetchUsers = async () => {
