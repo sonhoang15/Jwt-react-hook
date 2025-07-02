@@ -27,20 +27,20 @@ const NavHeader = (props) => {
         }
     }
 
-    if (user && user.isAuthenticated === true || location.pathname === '/') {
+    if (user && user.isAuthenticated === true || location.pathname === '/' || location.pathname === '/about') {
         return (
             <>
                 <div className="Nav-header">
-                    <Navbar collapseOnSelect expand="lg" bg="header" className="bg-body-tertiary">
+                    <Navbar collapseOnSelect expand="lg" bg="header">
                         <Container>
-                            <Navbar.Brand href="#home">
+                            <Navbar.Brand >
                                 <img
                                     src="/img/logo.svg"
                                     width="30"
                                     height="30"
                                     className="d-inline-block align-top"
                                 />
-                                HE
+                                <span className="brand-name">HE</span>
                             </Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
@@ -58,7 +58,7 @@ const NavHeader = (props) => {
 
                                         <>
                                             <Nav.Item className="nav-link">Hello {user.account.username}</Nav.Item>
-                                            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                                            <NavDropdown title="Setting" id="basic-nav-dropdown">
                                                 <NavDropdown.Item >
                                                     Change Password
                                                 </NavDropdown.Item>

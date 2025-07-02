@@ -1,9 +1,11 @@
 import axios from "axios";
 import { toast } from 'react-toastify';
+require("dotenv").config();
+
 
 // Set config defaults when creating the instance
 const instance = axios.create({
-    baseURL: 'http://localhost:8080'
+    baseURL: process.env.REACT_APP_BACKEND_URL
 });
 
 instance.defaults.withCredentials = true
@@ -38,7 +40,14 @@ instance.interceptors.response.use(function (response) {
     switch (status) {
         // authentication (token related issues)
         case 401: {
+            // if (window.location.pathname !== '/login'
+            //     && window.location.pathname !== '/register'
+            //     && window.location.pathname !== '/'
+            // ) {
+            //     toast.error("401 Unauthorized the user , please login ... ")
+            // }
             toast.error("401 Unauthorized the user , please login ... ")
+
             return error.response.data;
         }
 
@@ -50,12 +59,12 @@ instance.interceptors.response.use(function (response) {
 
         // bad request
         case 400: {
-            return Promise.reject(error);
+            return error.response.data;
         }
 
         // not found
         case 404: {
-            return Promise.reject(error);
+            return error.response.data;
         }
 
         // conflict

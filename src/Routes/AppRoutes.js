@@ -9,6 +9,8 @@ import User from '../components/ManageUsers/User';
 import PrivateRoutes from './PrivateRoutes';
 import Roles from '../components/Roles/Roles';
 import GroupRole from '../components/Roles/GroupRole';
+import Home from '../components/Home';
+import About from '../components/About'
 
 function Approutes(props) {
     return (
@@ -17,7 +19,6 @@ function Approutes(props) {
                 <PrivateRoutes exact path="/users" component={User} />
                 <PrivateRoutes exact path="/roles" component={Roles} />
                 <PrivateRoutes exact path="/group-role" component={GroupRole} />
-                {/* <PrivateRoutes path="/project" /> */}
                 <Route path="/login">
                     <Login />
                 </Route>
@@ -25,7 +26,10 @@ function Approutes(props) {
                     <Register />
                 </Route>
                 <Route path="/" exact>
-                    home
+                    <Home />
+                </Route>
+                <Route path="/about" exact>
+                    <About />
                 </Route>
                 <Route path="*">
                     404 not found

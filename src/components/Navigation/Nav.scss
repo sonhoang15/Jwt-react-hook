@@ -23,20 +23,17 @@
 }
 
 .Nav-header {
+    // padding-bottom: 0.5rem;
+
+    // .navbar {
+    //     padding-bottom: 0 !important;
+    // }
+
     .bg-header {
         background-color: aqua;
     }
 
-
-
-
     .navbar-light {
-        .navbar-brand {
-
-            &:hover {
-                color: rgb(255, 255, 255) !important;
-            }
-        }
 
         .nav-link {
 
@@ -48,6 +45,7 @@
         .navbar-nav {
             .nav-link {
                 color: rgb(0, 47, 255);
+
 
                 &:hover {
                     color: #04AA6D !important;

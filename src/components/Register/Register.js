@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import "./Register.scss"
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import img1 from "../../asset/Register or die.jpg"
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { RegisterService } from '../../Services/userService';
+import { UserContext } from '../../context/UserContext';
 const Register = (props) => {
+    const { user } = useContext(UserContext)
     const [email, setEmail] = React.useState("");
     const [username, setUserName] = React.useState("");
     const [phone, setPhone] = React.useState("");
@@ -73,10 +75,16 @@ const Register = (props) => {
         }
 
     }
+
     let history = useHistory();
     const login = () => {
         history.push("/login")
     }
+    useEffect(() => {
+        if (user && user.isAuthenticated) {
+            history.push('/')
+        }
+    }, [])
     return (
         <div className='register-container'>
             <div className='container'>
@@ -131,6 +139,12 @@ const Register = (props) => {
                         <hr />
                         <div className='text-center'>
                             <button className='btn btn-primary' onClick={() => login()}>Already've an account ?</button>
+                            <div className=" mt-3 return">
+                                <Link to='/'>
+                                    <i class="fa fa-chevron-circle-left" ></i>
+                                    <span>Return to Home</span>
+                                </Link>
+                            </div>
                         </div>
 
                     </div>

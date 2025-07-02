@@ -1,6 +1,6 @@
 
 import "./Login.scss"
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import img1 from "../../asset/hi login hẹ hẹ.jpg"
 import { useEffect, useState, useContext } from 'react';
 import { toast } from 'react-toastify';
@@ -12,7 +12,7 @@ import { join } from "lodash";
 
 const Login = (props) => {
 
-    const { loginContext } = useContext(UserContext);
+    const { user, loginContext } = useContext(UserContext);
     let history = useHistory();
 
     const [valueLogin, setValueLogin] = useState("");
@@ -73,6 +73,11 @@ const Login = (props) => {
             login();
         }
     }
+    useEffect(() => {
+        if (user && user.isAuthenticated) {
+            history.push('/')
+        }
+    }, [])
     return (
         <div className='login-container'>
             <div className='container'>
@@ -112,6 +117,12 @@ const Login = (props) => {
                         <hr />
                         <div className='text-center'>
                             <button className='btn btn-primary' onClick={() => createNewUser()}>Create new account</button>
+                            <div className=" mt-3 return">
+                                <Link to='/'>
+                                    <i className="fa fa-chevron-circle-left" ></i>
+                                    <span>Return to Home</span>
+                                </Link>
+                            </div>
                         </div>
 
                     </div>

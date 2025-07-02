@@ -39,13 +39,10 @@ function ModalUser(props) {
         }
     }, [dataModalUser]);
     useEffect(() => {
-        if (action === "CREATE") {
-            if (groups && groups.length > 0) {
-                setUserData({ ...userData, group: groups[0].id })
-            }
-
+        if (action === "CREATE" && groups.length > 0) {
+            setUserData({ ...defaultUserdata, group: groups[0].id });
         }
-    }, [action]);
+    }, [action, groups]);
     const getGroups = async () => {
         let res = await fetchGroups();
         if (res && +res.EC === 0) {
@@ -86,8 +83,9 @@ function ModalUser(props) {
         let check = checkValidInput()
         if (check === true) {
             let res = action === 'CREATE' ?
+                toast.success('Create succsed...') &&
                 await createNewUser({ ...userData, groupId: userData['group'] })
-                : await updateUser({ ...userData, groupId: userData['group'] });
+                : toast.success('Update succsed...') && await updateUser({ ...userData, groupId: userData['group'] });
 
             if (res && res.EC === 0) {
                 props.hide();
@@ -111,7 +109,7 @@ function ModalUser(props) {
             <Modal size='lg' show={props.show} className='modal-user' >
                 <Modal.Header >
                     <Modal.Title id='contained-modal-title-vcenter'>
-                        <span>{props.Title === 'CREATE' ? 'Create new user' : 'Edit user'}</span>
+                        <span>{action === 'CREATE' ? 'Create new user' : 'Edit user'}</span>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

@@ -2,22 +2,27 @@ import './App.scss';
 import NavHeader from './components/Navigation/Nav';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import _ from 'lodash';
 import { BrowserRouter as Router, } from "react-router-dom";
 import Approutes from './Routes/AppRoutes';
 import { ClimbingBoxLoader } from "react-spinners";
 import { UserContext } from "./context/UserContext"
+import { Scrollbars } from 'react-custom-scrollbars'
 
 
-function App() {
+const App = () => {
 
   const { user } = useContext(UserContext);
-  console.log("user:", user);
+  const [scrollHeight, setScrollHeight] = useState(0);
+  useEffect(() => {
+    let windowHeight = window.innerHeight;
+    setScrollHeight(windowHeight)
+  }, [user])
 
   return (
-    <>
 
+    <Scrollbars autoHide style={{ height: scrollHeight }}>
       <Router>
         {user && user.isLoading ?
           <div className='loading-container'>
@@ -43,7 +48,7 @@ function App() {
       </Router>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}
@@ -53,8 +58,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-
-    </>
+    </Scrollbars >
   );
 }
 
