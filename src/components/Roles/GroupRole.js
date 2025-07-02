@@ -3,7 +3,7 @@ import './GroupRole.scss'
 import { useState, useEffect } from 'react';
 import { fetchGroups } from '../../Services/userService';
 import { toast } from 'react-toastify';
-import { fetchAllRole, fetchRoleByGroup } from '../../Services/roleService'
+import { fetchAllRole, fetchRoleByGroup, assignToGroup } from '../../Services/roleService'
 import _ from 'lodash';
 
 const GroupRole = (props) => {
@@ -40,8 +40,6 @@ const GroupRole = (props) => {
         if (value) {
             let data = await fetchRoleByGroup(value)
             if (data && +data.EC === 0) {
-                console.log('group roles', data.DT)
-                console.log('list roles', listRoles)
                 let result = buildDataByGroup(data.DT.Roles, listRoles)
                 setAssignRoleByGroup(result)
             }
@@ -73,6 +71,27 @@ const GroupRole = (props) => {
             _assignRoleByGroup[foundIndex].isAssigned = !_assignRoleByGroup[foundIndex].isAssigned
         }
         setAssignRoleByGroup(_assignRoleByGroup)
+    }
+
+    const buildDataToSave = () => {
+        let result = {};
+        const _assignRoleByGroup = _.cloneDeep(assignRoleByGroup);
+        result.groupId = group
+        let groupRolesFilter = _assignRoleByGroup.filter(item => item.isAssigned === true)
+        let finalGroupRoles = groupRolesFilter.map(item => {
+            let data = { groupId: +group, roleId: +item.id }
+            return data
+        })
+        result.groupRoles = finalGroupRoles;
+        return result
+    }
+
+    const handleSave = async () => {
+        let data = buildDataToSave()
+        let res = await assignToGroup(data)
+        if (res && res.EC === 0) {
+            toast.success(res.EM);
+        }
     }
 
     return (
@@ -122,7 +141,7 @@ const GroupRole = (props) => {
                                     })
                                 }
                                 <div className=' mt3'>
-                                    <button className='btn btn-warning'>save</button>
+                                    <button className='btn btn-warning' onClick={() => handleSave()}>save</button>
                                 </div>
                             </div>
                         }
