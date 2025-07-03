@@ -30,27 +30,59 @@
     // }
 
     .bg-header {
-        background-color: aqua;
+        background-color: #000000;
     }
 
     .navbar-light {
+        .navbar-brand {
+            color: white !important;
+        }
 
         .nav-link {
 
             &.active {
-                color: rgb(255, 0, 217) !important;
+                color: rgb(0, 255, 213) !important;
+                background-color: #04aaa5 !important;
             }
         }
 
         .navbar-nav {
             .nav-link {
-                color: rgb(0, 47, 255);
+                color: black;
+            }
 
+            .menus {
+                margin-left: 10px;
+                border-radius: 5%;
 
                 &:hover {
-                    color: #04AA6D !important;
+                    color: white !important;
+                    background-color: #5a5f73;
                 }
 
+                background-color: #444857;
+            }
+
+            .btn {
+                background-color: #47cf73;
+            }
+
+            .login {
+                &:hover {
+                    color: white !important;
+                    background-color: #248c46;
+                }
+
+            }
+
+            .setting {
+                background-color: #47cf73;
+                border-radius: 5%;
+
+                &:hover {
+                    color: white !important;
+                    background-color: #248c46;
+                }
             }
         }
 

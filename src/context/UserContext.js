@@ -51,7 +51,9 @@ const UserProvider = ({ children }) => {
         }
     }
     useEffect(() => {
-        if (window.location.pathname !== '/' && window.location.pathname !== '/login') {
+        if (window.location.pathname !== '/' && window.location.pathname !== '/login'
+            && window.location.pathname !== '/register'
+        ) {
             fetchUser()
         } else {
             setUser({ ...user, isLoading: false })

@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     let windowHeight = window.innerHeight;
     setScrollHeight(windowHeight)
-  }, [user])
+  }, [])
 
   return (
 

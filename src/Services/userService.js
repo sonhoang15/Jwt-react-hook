@@ -1,9 +1,9 @@
 // import axios from "axios";
 import axios from "../setup/axios"
 
-const RegisterService = (email, username, phone, password) => {
+const RegisterService = (email, username, phone, address, sex, password) => {
     return axios.post("/api/v1/register", {
-        email, username, phone, password,
+        email, username, phone, address, sex, password,
     })
 }
 const LoginService = (valueLogin, password) => {

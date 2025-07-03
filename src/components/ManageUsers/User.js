@@ -11,7 +11,7 @@ import "./User.scss";
 const User = (props) => {
     const [listUser, setListUser] = useState([]);
     const [itemOffset, setItemOffset] = useState(1);
-    const [itemLimit, setItemLimit] = useState(3);
+    const [itemLimit, setItemLimit] = useState(5);
     const [pageCount, setPageCount] = useState(0);
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [userToDelete, setUserToDelete] = useState({});
@@ -98,7 +98,6 @@ const User = (props) => {
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">Id</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">User name</th>
                                         <th scope="col">Group</th>
@@ -112,7 +111,6 @@ const User = (props) => {
                                                 return (
                                                     <tr key={`user-${index}`}>
                                                         <th>{(itemOffset - 1) * itemLimit + index + 1}</th>
-                                                        <td>{item.id}</td>
                                                         <td>{item.email}</td>
                                                         <td>{item.username}</td>
                                                         <td>{item.Group ? item.Group.name : 'N/A'}</td>

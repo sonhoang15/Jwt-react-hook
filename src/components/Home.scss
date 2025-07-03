@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+.banner {
+    z-index: 999;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    padding: 3rem 2rem 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+
+    .content-right {
+        background: transparent;
+        border-radius: 10px;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        min-height: 410px;
+
+        img {
+            margin-bottom: 2rem;
+            display: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .filter-content {
+            position: relative;
+            min-width: 455px;
+
+            .background {
+                position: absolute;
+                width: 90%;
+                right: 0;
+                height: 410px;
+                background: linear-gradient(109.61deg, #4c4f5a 4.26%, #202125 84.84%);
+                border-radius: 10px;
+            }
+
+            .seccond-box {
+                right: -30px !important;
+                top: 130px !important;
+            }
+
+            .third-box {
+                right: 40px !important;
+                top: 300px !important;
+            }
+
+            .firt-box {
+                right: 30px;
+                top: -20px;
+                position: absolute;
+                width: 290px;
+                height: 130px;
+                background: #1d1e22;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, .5);
+                border-radius: 6px;
+
+                header {
+                    display: grid;
+                    grid-template-columns: 36px auto 36px;
+                    align-items: center;
+
+                    i {
+                        margin: 10px;
+                        color: #4c4f5a;
+                    }
+
+                    div {
+                        font-family: Lato, sans-serif;
+                        font-weight: 900;
+                        font-size: 13px;
+                        letter-spacing: 1.57px;
+                        color: #c5c8d4;
+                        margin: 0;
+                    }
+                }
+
+                .content {
+                    margin: 0 10px 10px 5px;
+
+                    code {
+                        font-family: "Source Code Pro", monospace;
+                        font-size: 12px;
+                        line-height: 1.3;
+
+                        p {
+                            margin-bottom: 0 !important;
+                        }
+
+                        .bg {
+                            padding-left: 40px;
+                        }
+
+                        .deg {
+                            padding-left: 70px;
+                        }
+
+                        .code-div {
+                            color: #a88038;
+                        }
+
+                        .code-class {
+                            color: #e1ca72;
+                        }
+
+                        .code-react {
+                            color: #74b087;
+                        }
+
+                        .code-scss-background {
+                            color: #9f8198;
+                        }
+
+                        .punctuation {
+                            color: white;
+                        }
+
+                        .code-colors {
+                            color: #7a99ad;
+                        }
+
+                        .text-function {
+                            margin-top: 15px;
+                        }
+
+                        .code-scss--119deg {
+                            color: #de7300;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .content-left {
+        position: relative;
+        z-index: 1;
+
+        .block-content {
+            display: flex;
+            gap: 1rem;
+        }
+
+
+        i {
+            font-size: 50px;
+            flex: 0 0 50px;
+            height: 50px;
+            margin-bottom: 2rem;
+        }
+
+    }
+}

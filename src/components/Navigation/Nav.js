@@ -34,23 +34,16 @@ const NavHeader = (props) => {
                     <Navbar collapseOnSelect expand="lg" bg="header">
                         <Container>
                             <Navbar.Brand >
-                                <img
-                                    src="/img/logo.svg"
-                                    width="30"
-                                    height="30"
-                                    className="d-inline-block align-top"
-                                />
-                                <span className="brand-name">HE</span>
+                                <span className="brand-name"> C <i class="fa fa-codepen" aria-hidden="true"></i> D E</span>
                             </Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="me-auto">
-                                    <NavLink className="nav-link" to="/" exact >Home</NavLink>
-                                    <NavLink className="nav-link" to="/users">User</NavLink>
-                                    <NavLink className="nav-link" to="/roles">Roles</NavLink>
-                                    <NavLink className="nav-link" to="/group-role">Group roles</NavLink>
-                                    <NavLink className="nav-link" to="/project">Project</NavLink>
-                                    <NavLink className="nav-link" to="/about">About</NavLink>
+                                    <NavLink className="nav-link menus" to="/" exact >Home</NavLink>
+                                    <NavLink className="nav-link menus" to="/users">User</NavLink>
+                                    <NavLink className="nav-link menus" to="/roles">Roles</NavLink>
+                                    <NavLink className="nav-link menus" to="/group-role">Group roles</NavLink>
+                                    <NavLink className="nav-link menus" to="/about">About</NavLink>
                                 </Nav>
                                 <Nav>
                                     {user && user.isAuthenticated === true
@@ -58,18 +51,14 @@ const NavHeader = (props) => {
 
                                         <>
                                             <Nav.Item className="nav-link">Hello {user.account.username}</Nav.Item>
-                                            <NavDropdown title="Setting" id="basic-nav-dropdown">
-                                                <NavDropdown.Item >
-                                                    Change Password
-                                                </NavDropdown.Item>
-                                                <NavDropdown.Divider />
+                                            <NavDropdown className="setting" title="Setting" id="basic-nav-dropdown">
                                                 <NavDropdown.Item >
                                                     <span onClick={() => handleLogout()}> Log out</span>
                                                 </NavDropdown.Item>
                                             </NavDropdown>
                                         </>
                                         :
-                                        <Link className="nav-link" to="/login">Login</Link>
+                                        <Link className="login nav-link btn" to="/login">Login</Link>
                                     }
 
                                 </Nav>

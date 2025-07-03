@@ -12,12 +12,16 @@ const Register = (props) => {
     const [email, setEmail] = React.useState("");
     const [username, setUserName] = React.useState("");
     const [phone, setPhone] = React.useState("");
+    const [address, setAddress] = React.useState("");
+    const [sex, setSex] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [repassword, setRePassword] = React.useState("");
     const defaultInput = {
         isValidEmail: true,
         isValidUserName: true,
         isValidPhone: true,
+        isValidAddress: true,
+        isValidSex: true,
         isValidPassword: true,
         isValidRePassword: true
     }
@@ -25,11 +29,13 @@ const Register = (props) => {
 
     const isValidInput = () => {
         setObjectCheckInput({ ...defaultInput });
-        if (!email || !username || !phone || !password || !repassword) {
+        if (!email || !username || !phone || !address || !sex || !password || !repassword) {
             setObjectCheckInput({
                 isValidEmail: false,
                 isValidUserName: false,
                 isValidPhone: false,
+                isValidAddress: false,
+                isValidSex: false,
                 isValidPassword: false,
                 isValidRePassword: false
             });
@@ -65,7 +71,7 @@ const Register = (props) => {
     const handleRegister = async () => {
         let check = isValidInput();
         if (check === true) {
-            let severData = await RegisterService(email, username, phone, password);
+            let severData = await RegisterService(email, username, phone, address, sex, password);
             if (+severData.EC === 0) {
                 toast.success(severData.EM);
                 history.push("/login");
@@ -120,6 +126,18 @@ const Register = (props) => {
                             <label>Phone</label>
                             <input type='text' className={objectCheckInput.isValidPhone ? 'form-control' : 'form-control is-invalid'} placeholder='Phone number'
                                 value={phone} onChange={(e) => setPhone(e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label>Address</label>
+                            <input type='text' className={objectCheckInput.isValidAddress ? 'form-control' : 'form-control is-invalid'} placeholder='Address'
+                                value={address} onChange={(e) => setAddress(e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label>Gender</label>
+                            <input type='text' className={objectCheckInput.isValidSex ? 'form-control' : 'form-control is-invalid'} placeholder='Gender'
+                                value={sex} onChange={(e) => setSex(e.target.value)}
                             />
                         </div>
                         <div className='form-group'>
