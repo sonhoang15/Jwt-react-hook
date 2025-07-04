@@ -33,6 +33,14 @@
         background-color: #000000;
     }
 
+    .navbar-toggler {
+        background-color: white !important;
+        border-color: #ccc;
+        /* hoặc transparent nếu muốn mờ */
+        border-radius: 4px;
+        padding: 0.25rem 0.5rem;
+    }
+
     .navbar-light {
         .navbar-brand {
             color: white !important;
@@ -63,6 +71,14 @@
                 background-color: #444857;
             }
 
+            @media (max-width: 991.98px) {
+                .nav-link.menus {
+                    border: none !important;
+                    border-radius: 0;
+                    margin: 0;
+                }
+            }
+
             .btn {
                 background-color: #47cf73;
             }
@@ -82,6 +98,15 @@
                 &:hover {
                     color: white !important;
                     background-color: #248c46;
+                }
+            }
+
+            @media (max-width: 991.98px) {
+                .setting {
+                    border: none !important;
+                    border-radius: 0;
+                    margin: 0;
+                    padding: 0.5rem 1rem;
                 }
             }
         }

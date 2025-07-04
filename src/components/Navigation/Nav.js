@@ -31,52 +31,59 @@ const NavHeader = (props) => {
         return (
             <>
                 <div className="Nav-header">
-                    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+                    <Navbar collapseOnSelect expand="lg" bg="header">
                         <Container>
-                            <Navbar.Brand>
-                                <span className="brand-name">
-                                    C <i className="fa fa-codepen" aria-hidden="true"></i> D E
-                                </span>
+                            <Navbar.Brand >
+                                <span className="brand-name"> C <i class="fa fa-codepen" aria-hidden="true"></i> D E</span>
                             </Navbar.Brand>
+                            {user && user.isAuthenticated === true
+                                ?
 
-                            {/* Toggle button visible on small screens */}
+                                <>
+                                    <div className="d-lg-none d-flex align-items-center ms-auto me-2 text-white">
+                                        <span className="me-2">Hello <strong>{user.account.username}</strong></span>
+                                        <NavDropdown title="⚙️" id="user-dropdown-mobile" align="end">
+                                            <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item>
+                                        </NavDropdown>
+                                    </div>
+                                </>
+                                :
+                                <Link className="d-lg-none d-flex align-items-center ms-auto me-2 btn btn-primary" to="/login">Login</Link>
+                            }
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
                             <Navbar.Collapse id="responsive-navbar-nav">
-                                {/* Left side nav */}
-                                <Nav className="mr-auto">
-                                    <NavLink className="nav-link menus" exact to="/">Home</NavLink>
+                                <Nav className="me-auto">
+                                    <NavLink className="nav-link menus" to="/" exact >Home</NavLink>
                                     <NavLink className="nav-link menus" to="/users">User</NavLink>
                                     <NavLink className="nav-link menus" to="/roles">Roles</NavLink>
                                     <NavLink className="nav-link menus" to="/group-role">Group roles</NavLink>
                                     <NavLink className="nav-link menus" to="/about">About</NavLink>
                                 </Nav>
 
-                                {/* Right side nav */}
-                                <Nav className="ml-auto">
-                                    {user?.isAuthenticated
-                                        ? (
-                                            <>
-                                                <Nav.Item className="nav-link">
-                                                    Hello <strong>{user.account.username}</strong>
-                                                </Nav.Item>
-                                                <NavDropdown title="Setting" id="collasible-nav-dropdown" align="end">
-                                                    <NavDropdown.Item as="button" onClick={handleLogout}>
-                                                        Log out
-                                                    </NavDropdown.Item>
-                                                </NavDropdown>
-                                            </>
-                                        ) : (
-                                            <Link className="login nav-link btn btn-outline-primary" to="/login">
-                                                Login
-                                            </Link>
-                                        )}
+                                <Nav className="ml-auto d-none d-lg-flex">
+                                    {user && user.isAuthenticated === true
+                                        ?
+
+                                        <>
+                                            <Nav.Item className="nav-link">Hello {user.account.username}</Nav.Item>
+                                            <NavDropdown className="setting" title="Setting" id="basic-nav-dropdown">
+                                                <NavDropdown.Item >
+                                                    <span onClick={() => handleLogout()}> Log out</span>
+                                                </NavDropdown.Item>
+                                            </NavDropdown>
+                                        </>
+                                        :
+                                        <Link className="login nav-link btn" to="/login">Login</Link>
+                                    }
+
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
                     </Navbar>
                 </div>
             </>
+
         );
     } else {
         return <></>
