@@ -1,5 +1,5 @@
 
-import "./Login.scss"
+import "./login.scss"
 import { useHistory, Link } from "react-router-dom";
 import img1 from "../../asset/hi login hẹ hẹ.jpg"
 import { useEffect, useState, useContext } from 'react';
