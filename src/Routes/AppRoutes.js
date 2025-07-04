@@ -3,7 +3,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
-import Login from '../components/Login/login';
+import Login from '../components/LoginUser/Login';
 import Register from '../components/Register/Register';
 import User from '../components/ManageUsers/User';
 import PrivateRoutes from './PrivateRoutes';
