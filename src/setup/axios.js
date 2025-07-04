@@ -6,8 +6,10 @@ require("dotenv").config();
 // Set config defaults when creating the instance
 const instance = axios.create({
     baseURL: process.env.REACT_APP_BACKEND_URL
-});
 
+
+});
+console.log("✅ Axios baseURL:", process.env.REACT_APP_BACKEND_URL);
 instance.defaults.withCredentials = true
 // // Alter defaults after instance has been created
 instance.interceptors.request.use(function (config) {
@@ -59,12 +61,12 @@ instance.interceptors.response.use(function (response) {
 
         // bad request
         case 400: {
-            return error.response.data;
+            return Promise.reject(error);
         }
 
         // not found
         case 404: {
-            return error.response.data;
+            return Promise.reject(error);
         }
 
         // conflict
