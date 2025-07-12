@@ -1,3 +1,17 @@
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    z-index: 99999;
+
+    .loading {
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+
 .login-container {
     background-color: #1e1f26;
     min-height: 100vh;
