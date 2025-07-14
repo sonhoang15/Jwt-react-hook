@@ -93,7 +93,7 @@ const User = (props) => {
                         </div>
                     </div>
                     <div className='user-table'>
-                        <div className='table'>
+                        <div className=' mt-3 table'>
                             <table className="table table-hover table-bordered">
                                 <thead>
                                     <tr>

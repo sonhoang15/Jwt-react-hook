@@ -94,7 +94,7 @@ const Home = () => {
                                     <span className="code-react">"#DE7300"</span>
                                     <span className='punctuation'>,</span>
                                     <span className="code-react">"#74B087"</span>
-                                    <pan className='punctuation'>];</pan>
+                                    <span className='punctuation'>];</span>
                                     <span className="HeaderHero-module_cc-HDcib"></span>
                                     <br />
                                     <p className='text-function'>

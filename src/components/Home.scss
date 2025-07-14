@@ -156,3 +156,24 @@
 
     }
 }
+
+
+
+@media screen and (max-width: 810px) {
+    .banner {
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 2rem;
+        grid-template-columns: none !important;
+
+        .content-left {
+            display: none;
+        }
+
+        .content-right {
+            margin: 0 auto !important;
+            display: block;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 .manage-user-container {
+
     i {
         padding-right: 7px;
     }
@@ -22,4 +23,21 @@
         }
     }
 
+}
+
+@media screen and (max-width: 768px) {
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    th,
+    td {
+        white-space: nowrap;
+    }
 }
