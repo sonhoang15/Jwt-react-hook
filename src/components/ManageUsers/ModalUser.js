@@ -82,12 +82,15 @@ function ModalUser(props) {
     const ConfirmUser = async () => {
         let check = checkValidInput()
         if (check === true) {
-            let res = action === 'CREATE' ?
-                toast.success('Create succsed...') &&
-                await createNewUser({ ...userData, groupId: userData['group'] })
-                : toast.success('Update succsed...') && await updateUser({ ...userData, groupId: userData['group'] });
+            let res;
+            if (action === 'CREATE') {
 
+                res = await createNewUser({ ...userData, groupId: userData['group'] });
+            } else {
+                res = await updateUser({ ...userData, groupId: userData['group'] });
+            }
             if (res && res.EC === 0) {
+                toast.success(res.EM);
                 props.hide();
                 setUserData({ ...defaultUserdata, group: groups && groups.length > 0 ? groups[0].id : '' })
             }
