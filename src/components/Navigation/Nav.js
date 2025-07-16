@@ -66,7 +66,7 @@ const NavHeader = (props) => {
                                         ?
 
                                         <>
-                                            <Nav.Item className="nav-link">Hello {user.account.username}</Nav.Item>
+                                            <Nav.Item className="nav-link welcome">Hello {user.account.username}</Nav.Item>
                                             <NavDropdown className="setting" title="Setting" id="basic-nav-dropdown">
                                                 <NavDropdown.Item >
                                                     <span onClick={() => handleLogout()}> Log out</span>
